@@ -525,32 +525,25 @@ footer strong{color:var(--gold);}
     <span class="qb qb-white">Sharp Fielder</span>
   </div>
 
-  <!-- VIDEO CAROUSEL -->
+  <!-- VIDEO CAROUSEL — single iframe, YouTube native playlist loop -->
   <div class="video-carousel">
     <div class="vc-tabs">
-      <button class="vc-tab active" onclick="showVideo(0)">Bowling Spell</button>
-      <button class="vc-tab" onclick="showVideo(1)">Pull Shot Six</button>
-      <button class="vc-tab" onclick="showVideo(2)">Sharp Catch</button>
+      <button class="vc-tab active" onclick="showVideo(0)">Bowling</button>
+      <button class="vc-tab" onclick="showVideo(1)">Batting</button>
+      <button class="vc-tab" onclick="showVideo(2)">Fielding</button>
     </div>
     <div class="vc-panels">
-      <!-- Tap-to-play overlay: satisfies iOS user-gesture requirement -->
-      <div id="carousel-tap-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,9,26,0.72);cursor:pointer;z-index:20;border-radius:0 0 6px 6px;">
-        <div style="text-align:center;pointer-events:none;">
-          <div style="font-size:58px;line-height:1;color:#fff;">&#9654;</div>
-          <div style="font-size:12px;margin-top:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Tap to play</div>
+      <div class="vc-panel active" id="vc-main">
+        <div class="vc-embed">
+          <iframe id="yt-main"
+            src="https://www.youtube.com/embed/X80ocE8spzg?playlist=rPJ2P0FUCzU,d_qIP4RvL7Y,X80ocE8spzg&loop=1&autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"></iframe>
         </div>
-      </div>
-      <div class="vc-panel active" id="vc-0">
-        <div class="vc-embed"></div>
-        <div class="vc-caption"><span class="vc-dot vc-dot-bowl"></span>Minor League Cricket &mdash; Disciplined fast bowling spell</div>
-      </div>
-      <div class="vc-panel" id="vc-1">
-        <div class="vc-embed"></div>
-        <div class="vc-caption"><span class="vc-dot vc-dot-bat"></span>U23 Regionals &mdash; Explosive pull shot for six off pace bowling</div>
-      </div>
-      <div class="vc-panel" id="vc-2">
-        <div class="vc-embed"></div>
-        <div class="vc-caption"><span class="vc-dot" style="background:#34D399"></span>Athletic catching at slips &mdash; Sharp fielding at the highest level</div>
+        <div class="vc-caption" id="vc-caption">
+          <span class="vc-dot vc-dot-bowl"></span>Minor League Cricket &mdash; Disciplined fast bowling spell
+        </div>
       </div>
     </div>
   </div>
@@ -861,77 +854,41 @@ footer strong{color:var(--gold);}
 </footer>
 
 <script>
-// ── YouTube IFrame API auto-carousel ──────────────────────────
-// ── Video Carousel — mobile-friendly (no IFrame API required) ──
-// Panel 0: Bowling Spell  — YouTube X80ocE8spzg
-// Panel 1: Pull Shot Six  — YouTube rPJ2P0FUCzU
-// Panel 2: Sharp Catch    — local video file
-// Panel 0: Bowling Spell  — YouTube X80ocE8spzg
-// Panel 1: Pull Shot Six  — YouTube rPJ2P0FUCzU
-// Panel 2: Sharp Catch    — YouTube d_qIP4RvL7Y
-const YT_IDS = ['X80ocE8spzg', 'rPJ2P0FUCzU', 'd_qIP4RvL7Y'];
-const players = [];
-let currentVideo = 0;
-let carouselStarted = false;
+// ── Video Carousel — YouTube native playlist loop ──────────────
+// Bowling (X80ocE8spzg) → Batting (rPJ2P0FUCzU) → Fielding (d_qIP4RvL7Y) → loops
+// YouTube handles sequencing natively via playlist= + loop=1. Zero JS required for looping.
+// Tab clicks simply reload the iframe starting from the chosen video.
 
-// Load YouTube IFrame API
-const ytTag = document.createElement('script');
-ytTag.src = 'https://www.youtube.com/iframe_api';
-document.head.appendChild(ytTag);
-
-window.onYouTubeIframeAPIReady = function() {
-  YT_IDS.forEach((id, i) => {
-    const embed = document.getElementById('vc-' + i).querySelector('.vc-embed');
-    embed.innerHTML = '<div id="yt-p-' + i + '"></div>';
-
-    players[i] = new YT.Player('yt-p-' + i, {
-      videoId: id,
-      playerVars: { autoplay: 0, mute: 1, rel: 0, modestbranding: 1, playsinline: 1, controls: 1 },
-      events: {
-        onReady: (e) => {
-          e.target.setSize('100%', '100%');
-          // Try silent autoplay on desktop (works on Chrome/Firefox with muted)
-          if (i === 0) e.target.playVideo();
-        },
-        onStateChange: (e) => {
-          // If autoplay succeeded on desktop, hide the tap overlay
-          if (e.data === YT.PlayerState.PLAYING && !carouselStarted) {
-            carouselStarted = true;
-            const overlay = document.getElementById('carousel-tap-overlay');
-            if (overlay) overlay.style.display = 'none';
-          }
-          // Auto-advance when a video ends
-          if (e.data === YT.PlayerState.ENDED) {
-            showVideo((currentVideo + 1) % YT_IDS.length);
-          }
-        }
-      }
-    });
-  });
-};
-
-// Tap overlay — satisfies iOS user-gesture requirement, then starts carousel
-document.getElementById('carousel-tap-overlay').addEventListener('click', function() {
-  this.style.display = 'none';
-  carouselStarted = true;
-  if (players[currentVideo] && players[currentVideo].playVideo) {
-    players[currentVideo].playVideo();
+var VIDEOS = [
+  {
+    id:       'X80ocE8spzg',
+    playlist: 'rPJ2P0FUCzU,d_qIP4RvL7Y,X80ocE8spzg',
+    caption:  '<span class="vc-dot vc-dot-bowl"></span>Minor League Cricket &mdash; Disciplined fast bowling spell'
+  },
+  {
+    id:       'rPJ2P0FUCzU',
+    playlist: 'd_qIP4RvL7Y,X80ocE8spzg,rPJ2P0FUCzU',
+    caption:  '<span class="vc-dot vc-dot-bat"></span>U23 Regionals &mdash; Explosive pull shot for six off pace bowling'
+  },
+  {
+    id:       'd_qIP4RvL7Y',
+    playlist: 'X80ocE8spzg,rPJ2P0FUCzU,d_qIP4RvL7Y',
+    caption:  '<span class="vc-dot" style="background:#34D399"></span>Athletic catching at slips &mdash; Sharp fielding at the highest level'
   }
-});
+];
 
 function showVideo(idx) {
-  document.querySelectorAll('.vc-tab').forEach((t, i) =>
-    t.classList.toggle('active', i === idx));
-  document.querySelectorAll('.vc-panel').forEach((p, i) =>
-    p.classList.toggle('active', i === idx));
-
-  if (players[currentVideo] && players[currentVideo].pauseVideo) {
-    players[currentVideo].pauseVideo();
-  }
-  currentVideo = idx;
-  if (players[idx] && players[idx].playVideo) {
-    players[idx].playVideo();
-  }
+  // Highlight the active tab
+  document.querySelectorAll('.vc-tab').forEach(function(t, i) {
+    t.classList.toggle('active', i === idx);
+  });
+  // Build src: start with chosen video, loop through all three, then loop forever
+  var v   = VIDEOS[idx];
+  var src = 'https://www.youtube.com/embed/' + v.id
+          + '?playlist=' + v.playlist
+          + '&loop=1&autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1';
+  document.getElementById('yt-main').src    = src;
+  document.getElementById('vc-caption').innerHTML = v.caption;
 }
 
 // Progress bar auto-advance (visual timer between videos)
@@ -946,16 +903,6 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-// Active nav on scroll
-const sections=document.querySelectorAll('section[id]');
-const navLinks=document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll',()=>{
-  let cur='';
-  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
-  navLinks.forEach(a=>{
-    a.classList.toggle('active', a.getAttribute('href')==='#'+cur);
-  });
-},{ passive:true });
 </script>
 </body>
 </html>
