@@ -533,34 +533,23 @@ footer strong{color:var(--gold);}
       <button class="vc-tab" onclick="showVideo(2)">Sharp Catch</button>
     </div>
     <div class="vc-panels">
-      <div class="vc-panel active" id="vc-0">
-        <div class="vc-embed">
-          <iframe id="yt-iframe-0"
-            src="https://www.youtube.com/embed/X80ocE8spzg?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"></iframe>
+      <!-- Tap-to-play overlay: satisfies iOS user-gesture requirement -->
+      <div id="carousel-tap-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,9,26,0.72);cursor:pointer;z-index:20;border-radius:0 0 6px 6px;">
+        <div style="text-align:center;pointer-events:none;">
+          <div style="font-size:58px;line-height:1;color:#fff;">&#9654;</div>
+          <div style="font-size:12px;margin-top:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Tap to play</div>
         </div>
+      </div>
+      <div class="vc-panel active" id="vc-0">
+        <div class="vc-embed"></div>
         <div class="vc-caption"><span class="vc-dot vc-dot-bowl"></span>Minor League Cricket &mdash; Disciplined fast bowling spell</div>
       </div>
       <div class="vc-panel" id="vc-1">
-        <div class="vc-embed">
-          <iframe id="yt-iframe-1"
-            src="about:blank"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"></iframe>
-        </div>
+        <div class="vc-embed"></div>
         <div class="vc-caption"><span class="vc-dot vc-dot-bat"></span>U23 Regionals &mdash; Explosive pull shot for six off pace bowling</div>
       </div>
       <div class="vc-panel" id="vc-2">
-        <div class="vc-embed">
-          <iframe id="yt-iframe-2"
-            src="about:blank"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"></iframe>
-        </div>
+        <div class="vc-embed"></div>
         <div class="vc-caption"><span class="vc-dot" style="background:#34D399"></span>Athletic catching at slips &mdash; Sharp fielding at the highest level</div>
       </div>
     </div>
@@ -880,43 +869,69 @@ footer strong{color:var(--gold);}
 // Panel 0: Bowling Spell  — YouTube X80ocE8spzg
 // Panel 1: Pull Shot Six  — YouTube rPJ2P0FUCzU
 // Panel 2: Sharp Catch    — YouTube d_qIP4RvL7Y
-const YT_SRCS = [
-  'https://www.youtube.com/embed/X80ocE8spzg?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1',
-  'https://www.youtube.com/embed/rPJ2P0FUCzU?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1',
-  'https://www.youtube.com/embed/d_qIP4RvL7Y?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1'
-];
-const YT_IFRAME_IDS = ['yt-iframe-0', 'yt-iframe-1', 'yt-iframe-2'];
+const YT_IDS = ['X80ocE8spzg', 'rPJ2P0FUCzU', 'd_qIP4RvL7Y'];
+const players = [];
 let currentVideo = 0;
+let carouselStarted = false;
 
-// YouTube sends postMessage when a video ends (state 0 = ended)
-window.addEventListener('message', (e) => {
-  if (e.origin !== 'https://www.youtube.com') return;
-  try {
-    const data = JSON.parse(e.data);
-    if (data.event === 'onStateChange' && data.info === 0) {
-      showVideo((currentVideo + 1) % YT_SRCS.length);
-    }
-  } catch (_) {}
+// Load YouTube IFrame API
+const ytTag = document.createElement('script');
+ytTag.src = 'https://www.youtube.com/iframe_api';
+document.head.appendChild(ytTag);
+
+window.onYouTubeIframeAPIReady = function() {
+  YT_IDS.forEach((id, i) => {
+    const embed = document.getElementById('vc-' + i).querySelector('.vc-embed');
+    embed.innerHTML = '<div id="yt-p-' + i + '"></div>';
+
+    players[i] = new YT.Player('yt-p-' + i, {
+      videoId: id,
+      playerVars: { autoplay: 0, mute: 1, rel: 0, modestbranding: 1, playsinline: 1, controls: 1 },
+      events: {
+        onReady: (e) => {
+          e.target.setSize('100%', '100%');
+          // Try silent autoplay on desktop (works on Chrome/Firefox with muted)
+          if (i === 0) e.target.playVideo();
+        },
+        onStateChange: (e) => {
+          // If autoplay succeeded on desktop, hide the tap overlay
+          if (e.data === YT.PlayerState.PLAYING && !carouselStarted) {
+            carouselStarted = true;
+            const overlay = document.getElementById('carousel-tap-overlay');
+            if (overlay) overlay.style.display = 'none';
+          }
+          // Auto-advance when a video ends
+          if (e.data === YT.PlayerState.ENDED) {
+            showVideo((currentVideo + 1) % YT_IDS.length);
+          }
+        }
+      }
+    });
+  });
+};
+
+// Tap overlay — satisfies iOS user-gesture requirement, then starts carousel
+document.getElementById('carousel-tap-overlay').addEventListener('click', function() {
+  this.style.display = 'none';
+  carouselStarted = true;
+  if (players[currentVideo] && players[currentVideo].playVideo) {
+    players[currentVideo].playVideo();
+  }
 });
 
 function showVideo(idx) {
-  // Update tab highlights
   document.querySelectorAll('.vc-tab').forEach((t, i) =>
     t.classList.toggle('active', i === idx));
-
-  // Update panel visibility
   document.querySelectorAll('.vc-panel').forEach((p, i) =>
     p.classList.toggle('active', i === idx));
 
-  // Stop outgoing — unload iframe (most reliable across all devices)
-  const outFrame = document.getElementById(YT_IFRAME_IDS[currentVideo]);
-  if (outFrame) outFrame.src = 'about:blank';
-
+  if (players[currentVideo] && players[currentVideo].pauseVideo) {
+    players[currentVideo].pauseVideo();
+  }
   currentVideo = idx;
-
-  // Start incoming — set src with autoplay=1 (works on iOS Safari when muted + playsinline)
-  const inFrame = document.getElementById(YT_IFRAME_IDS[idx]);
-  if (inFrame) inFrame.src = YT_SRCS[idx];
+  if (players[idx] && players[idx].playVideo) {
+    players[idx].playVideo();
+  }
 }
 
 // Progress bar auto-advance (visual timer between videos)
