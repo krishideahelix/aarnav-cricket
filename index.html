@@ -64,7 +64,7 @@ nav{
 .nav-links{display:flex;gap:28px;list-style:none;}
 .nav-links a{
   color:var(--muted);font-size:0.82rem;font-weight:700;
-  letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;
+  letter-spacing:0.04em;transition:color 0.2s;
 }
 .nav-links a:hover,.nav-links a.active{color:var(--gold);}
 
@@ -120,7 +120,7 @@ h1.hero-name{
 }
 .qb{
   padding:5px 13px;border-radius:6px;
-  font-size:0.73rem;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;
+  font-size:0.75rem;font-weight:700;letter-spacing:0.03em;
 }
 .qb-blue{background:rgba(29,78,216,0.15);color:#93C5FD;border:1px solid rgba(29,78,216,0.4);}
 .qb-red {background:rgba(185,28,28,0.15);color:#FCA5A5;border:1px solid rgba(185,28,28,0.4);}
@@ -256,6 +256,8 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
 }
 .ic-bat::before{background:linear-gradient(90deg,var(--gold),var(--usa-red-lt));}
 .ic-bowl::before{background:linear-gradient(90deg,var(--usa-blue),var(--usa-blue-lt));}
+.ic-allround::before{background:linear-gradient(90deg,var(--gold),var(--usa-blue-lt));}
+.ic-allround::before{background:linear-gradient(90deg,var(--gold),var(--usa-blue-lt));}
 .ic-type{
   font-size:0.65rem;font-weight:800;letter-spacing:0.14em;
   text-transform:uppercase;margin-bottom:8px;
@@ -520,7 +522,7 @@ footer strong{color:var(--gold);}
   <!-- Athlete Quality Badges -->
   <div class="quality-badges">
     <span class="qb qb-gold">&#9733; U23 National Champion</span>
-    <span class="qb qb-blue">Consistent Six Hitter</span>
+    <span class="qb qb-blue">&#128293; 111 Sixes &amp; Counting</span>
     <span class="qb qb-red">Prolific Run-Scorer</span>
     <span class="qb qb-white">Sharp Fielder</span>
   </div>
@@ -609,7 +611,7 @@ footer strong{color:var(--gold);}
 <section id="innings" class="ground-bg">
   <div class="sec-label">Scorecard Highlights</div>
   <h2 class="sec-title">Match-Winning<br>Performances</h2>
-  <p class="sec-desc">When it mattered most, Aarnav delivered. These four performances show exactly what he brings to any squad.</p>
+  <p class="sec-desc">When it mattered most, Aarnav delivered. These seven performances — verified on CricClubs — show exactly what he brings to any squad.</p>
 
   <div class="innings-grid">
 
@@ -663,6 +665,45 @@ footer strong{color:var(--gold);}
         <div class="ic-stat"><div class="ic-num blue">0</div><div class="ic-sub">Maidens</div></div>
       </div>
       <div class="ic-highlight blue">Eco 3.12 &mdash; Match-Winning Spell</div>
+    </div>
+
+    <div class="innings-card ic-bat">
+      <div class="ic-type bat">Batting &middot; NCCA &middot; 16-Over League</div>
+      <div class="ic-match">Santa Clara Rhinos vs Tracy Centurions</div>
+      <div class="ic-dismiss">Not Out &mdash; Rhinos won by 37 runs</div>
+      <div class="ic-stats">
+        <div class="ic-stat"><div class="ic-num">46*</div><div class="ic-sub">Runs</div></div>
+        <div class="ic-stat"><div class="ic-num">21</div><div class="ic-sub">Balls</div></div>
+        <div class="ic-stat"><div class="ic-num">5</div><div class="ic-sub">Sixes</div></div>
+        <div class="ic-stat"><div class="ic-num">219</div><div class="ic-sub">SR</div></div>
+      </div>
+      <div class="ic-highlight">&#9889; SR 219.05 &mdash; Match-Winning Blitz</div>
+    </div>
+
+    <div class="innings-card ic-bat">
+      <div class="ic-type bat">Batting &middot; NCCA &middot; 20-Over League</div>
+      <div class="ic-match">Santa Clara Rhinos vs Pittsburg Pirates</div>
+      <div class="ic-dismiss">Not Out &mdash; Rhinos won by 67 runs</div>
+      <div class="ic-stats">
+        <div class="ic-stat"><div class="ic-num">117*</div><div class="ic-sub">Runs</div></div>
+        <div class="ic-stat"><div class="ic-num">55</div><div class="ic-sub">Balls</div></div>
+        <div class="ic-stat"><div class="ic-num">9</div><div class="ic-sub">Sixes</div></div>
+        <div class="ic-stat"><div class="ic-num">6</div><div class="ic-sub">Fours</div></div>
+      </div>
+      <div class="ic-highlight">&#9889; SR 212.73 &mdash; Century Under Lights</div>
+    </div>
+
+    <div class="innings-card ic-allround">
+      <div class="ic-type" style="background:rgba(245,158,11,0.15);color:#FCD34D;border-color:rgba(245,158,11,0.4);">All-Round &middot; NCCA &middot; 45-Over League</div>
+      <div class="ic-match">Santa Clara Bees vs Indus Conquest</div>
+      <div class="ic-dismiss">Not Out (bat) + 4 wkts (bowl) &mdash; Bees won by 5 wickets</div>
+      <div class="ic-stats">
+        <div class="ic-stat"><div class="ic-num">75*</div><div class="ic-sub">Runs</div></div>
+        <div class="ic-stat"><div class="ic-num">83</div><div class="ic-sub">Balls</div></div>
+        <div class="ic-stat"><div class="ic-num blue">4</div><div class="ic-sub">Wickets</div></div>
+        <div class="ic-stat"><div class="ic-num blue">26</div><div class="ic-sub">Runs Gave</div></div>
+      </div>
+      <div class="ic-highlight" style="color:var(--gold-lt);">&#11088; 75* &amp; 4/26 (9 ov, Eco 2.89) &mdash; Complete All-Round Game</div>
     </div>
 
   </div>
@@ -855,24 +896,24 @@ footer strong{color:var(--gold);}
 
 <script>
 // ── Video Carousel — YouTube native playlist loop ──────────────
-// Bowling (X80ocE8spzg) → Batting (rPJ2P0FUCzU) → Fielding (d_qIP4RvL7Y) → loops
+// Bowling (X80ocE8spzg) → Batting (lAmdrbW5_dQ) → Fielding (d_qIP4RvL7Y) → loops
 // YouTube handles sequencing natively via playlist= + loop=1. Zero JS required for looping.
 // Tab clicks simply reload the iframe starting from the chosen video.
 
 var VIDEOS = [
   {
     id:       'X80ocE8spzg',
-    playlist: 'rPJ2P0FUCzU,d_qIP4RvL7Y,X80ocE8spzg',
+    playlist: 'lAmdrbW5_dQ,d_qIP4RvL7Y,X80ocE8spzg',
     caption:  '<span class="vc-dot vc-dot-bowl"></span>Minor League Cricket &mdash; Disciplined fast bowling spell'
   },
   {
-    id:       'rPJ2P0FUCzU',
-    playlist: 'd_qIP4RvL7Y,X80ocE8spzg,rPJ2P0FUCzU',
+    id:       'lAmdrbW5_dQ',
+    playlist: 'd_qIP4RvL7Y,X80ocE8spzg,lAmdrbW5_dQ',
     caption:  '<span class="vc-dot vc-dot-bat"></span>U23 Regionals &mdash; Explosive pull shot for six off pace bowling'
   },
   {
     id:       'd_qIP4RvL7Y',
-    playlist: 'X80ocE8spzg,rPJ2P0FUCzU,d_qIP4RvL7Y',
+    playlist: 'X80ocE8spzg,lAmdrbW5_dQ,d_qIP4RvL7Y',
     caption:  '<span class="vc-dot" style="background:#34D399"></span>Athletic catching at slips &mdash; Sharp fielding at the highest level'
   }
 ];
