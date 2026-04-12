@@ -64,7 +64,7 @@ nav{
 .nav-links{display:flex;gap:28px;list-style:none;}
 .nav-links a{
   color:var(--muted);font-size:0.82rem;font-weight:700;
-  letter-spacing:0.04em;transition:color 0.2s;
+  letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;
 }
 .nav-links a:hover,.nav-links a.active{color:var(--gold);}
 
@@ -120,7 +120,7 @@ h1.hero-name{
 }
 .qb{
   padding:5px 13px;border-radius:6px;
-  font-size:0.75rem;font-weight:700;letter-spacing:0.03em;
+  font-size:0.73rem;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;
 }
 .qb-blue{background:rgba(29,78,216,0.15);color:#93C5FD;border:1px solid rgba(29,78,216,0.4);}
 .qb-red {background:rgba(185,28,28,0.15);color:#FCA5A5;border:1px solid rgba(185,28,28,0.4);}
@@ -256,8 +256,6 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
 }
 .ic-bat::before{background:linear-gradient(90deg,var(--gold),var(--usa-red-lt));}
 .ic-bowl::before{background:linear-gradient(90deg,var(--usa-blue),var(--usa-blue-lt));}
-.ic-allround::before{background:linear-gradient(90deg,var(--gold),var(--usa-blue-lt));}
-.ic-allround::before{background:linear-gradient(90deg,var(--gold),var(--usa-blue-lt));}
 .ic-type{
   font-size:0.65rem;font-weight:800;letter-spacing:0.14em;
   text-transform:uppercase;margin-bottom:8px;
@@ -469,6 +467,39 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
 }
 .btn-secondary:hover{border-color:var(--usa-blue-lt);color:var(--usa-blue-lt);}
 
+/* ─── SIX SHOTS ─── */
+#sixshots{background:var(--card);}
+.sixshots-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;margin-top:40px;
+}
+.sv-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;
+  transition:transform 0.25s,border-color 0.25s;
+}
+.sv-card:hover{transform:translateY(-5px);border-color:var(--gold);}
+.sv-wrap{
+  position:relative;width:100%;padding-top:56.25%;/* 16:9 */
+  background:#000;overflow:hidden;
+}
+.sv-wrap video{
+  position:absolute;top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;
+}
+.sv-caption{padding:16px 18px 20px;}
+.sv-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);
+  color:var(--gold);font-size:0.65rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:50px;padding:4px 10px;margin-bottom:8px;
+}
+.sv-title{font-size:0.95rem;font-weight:900;margin-bottom:4px;color:var(--white);}
+.sv-sub{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+
 /* ─── FOOTER ─── */
 footer{
   background:var(--bg);border-top:1px solid var(--border);
@@ -522,7 +553,7 @@ footer strong{color:var(--gold);}
   <!-- Athlete Quality Badges -->
   <div class="quality-badges">
     <span class="qb qb-gold">&#9733; U23 National Champion</span>
-    <span class="qb qb-blue">&#128293; 111 Sixes &amp; Counting</span>
+    <span class="qb qb-blue">Consistent Six Hitter (111 so far)</span>
     <span class="qb qb-red">Prolific Run-Scorer</span>
     <span class="qb qb-white">Sharp Fielder</span>
   </div>
@@ -611,7 +642,7 @@ footer strong{color:var(--gold);}
 <section id="innings" class="ground-bg">
   <div class="sec-label">Scorecard Highlights</div>
   <h2 class="sec-title">Match-Winning<br>Performances</h2>
-  <p class="sec-desc">When it mattered most, Aarnav delivered. These seven performances — verified on CricClubs — show exactly what he brings to any squad.</p>
+  <p class="sec-desc">When it mattered most, Aarnav delivered. These four performances show exactly what he brings to any squad.</p>
 
   <div class="innings-grid">
 
@@ -794,95 +825,66 @@ footer strong{color:var(--gold);}
   </div>
 </section>
 
-<!-- ═══ LEAGUES ═══ -->
-<section id="leagues">
-  <div class="sec-label">Verified Statistics</div>
-  <h2 class="sec-title">League by League</h2>
-  <p class="sec-desc">Every number independently verified on CricClubs across California&rsquo;s top domestic competitions.</p>
+<!-- ═══ SIX SHOTS ═══ -->
+<section id="sixshots">
+  <div class="sec-label">Batting Highlights</div>
+  <h2 class="sec-title">Six Shots<br><span style="color:var(--gold)">Pure Power</span></h2>
+  <p class="sec-desc">111 career sixes and counting &mdash; four shots that show exactly why Aarnav Iyer is one of California cricket&rsquo;s most feared boundary hitters.</p>
 
-  <div class="leagues-grid">
-    <div class="lc lc-gold">
-      <span class="lc-icon">&#127956;</span>
-      <div class="lc-tag">Northern California Cricket Association</div>
-      <div class="lc-title">NCCA &mdash; Premier League</div>
-      <div class="lr"><span class="lr-label">Matches</span><span class="lr-val v-gold">53</span></div>
-      <div class="lr"><span class="lr-label">Total Runs</span><span class="lr-val v-gold">1,438</span></div>
-      <div class="lr"><span class="lr-label">Batting Strike Rate</span><span class="lr-val v-gold">122.59</span></div>
-      <div class="lr"><span class="lr-label">Wickets</span><span class="lr-val v-blue">43</span></div>
-      <div class="lr"><span class="lr-label">Bowling Economy</span><span class="lr-val v-blue">4.07</span></div>
-      <a class="lc-link" href="https://cricclubs.com/NCCA/viewPlayer.do?playerId=502830&clubId=1191" target="_blank">View Full NCCA Stats &rarr;</a>
-    </div>
-    <div class="lc lc-blue">
-      <span class="lc-icon">&#127758;</span>
-      <div class="lc-tag">Southern California Cricket Association</div>
-      <div class="lc-title">SCCA</div>
-      <div class="lr"><span class="lr-label">Matches</span><span class="lr-val v-gold">7</span></div>
-      <div class="lr"><span class="lr-label">Total Runs</span><span class="lr-val v-gold">172</span></div>
-      <div class="lr"><span class="lr-label">Batting Strike Rate</span><span class="lr-val v-gold">130.30</span></div>
-      <div class="lr"><span class="lr-label">Wickets</span><span class="lr-val v-blue">5</span></div>
-      <div class="lr"><span class="lr-label">Bowling Economy</span><span class="lr-val v-blue">5.75</span></div>
-      <a class="lc-link" href="https://cricclubs.com/SCCA/viewPlayer.do?playerId=502830&clubId=661" target="_blank">View Full SCCA Stats &rarr;</a>
-    </div>
-    <div class="lc lc-red">
-      <span class="lc-icon">&#9881;</span>
-      <div class="lc-tag">USA Minor League Cricket</div>
-      <div class="lc-title">MiLC &mdash; East Bay Blazers</div>
-      <div class="lr"><span class="lr-label">Matches</span><span class="lr-val v-gold">12</span></div>
-      <div class="lr"><span class="lr-label">Runs Scored</span><span class="lr-val v-gold">22</span></div>
-      <div class="lr"><span class="lr-label">Wickets Taken</span><span class="lr-val v-blue">4</span></div>
-      <div class="lr"><span class="lr-label">Team</span><span class="lr-val" style="font-size:0.85rem">East Bay Blazers</span></div>
-      <div class="lr"><span class="lr-label">Level</span><span class="lr-val" style="font-size:0.85rem">National</span></div>
-      <a class="lc-link" href="https://cricclubs.com/MiLC/viewPlayer.do?playerId=502830&clubId=18036" target="_blank">View Minor League Stats &rarr;</a>
-    </div>
-  </div>
-</section>
+  <div class="sixshots-grid">
 
-<!-- ═══ WHY AARNAV ═══ -->
-<section id="about">
-  <div class="about-grid">
-    <div>
-      <div class="sec-label">Player Profile</div>
-      <h2 class="sec-title">Why Selectors<br>Are Watching</h2>
-      <p class="sec-desc">A rare blend of match-winning power, disciplined bowling, and elite fielding &mdash; Aarnav Iyer is the complete package for T20 cricket.</p>
-      <ul class="why-list">
-        <li><span class="wi">&#128293;</span><div><div class="wl">111 Career Sixes &mdash; Consistent Six Hitter</div><div class="wd">One of the most prolific boundary hitters in California cricket. 111 sixes across 148 matches signals genuine match-changing ability in any format.</div></div></li>
-        <li><span class="wi">&#9889;</span><div><div class="wl">High Strike Rate Across All Formats</div><div class="wd">Strike rates of 257, 158, and 155 in key innings &mdash; and a career SR of 96.99 across all match types. Adapts his game but never loses the intent.</div></div></li>
-        <li><span class="wi">&#127919;</span><div><div class="wl">Genuine Fast Bowling Threat</div><div class="wd">Best bowling of 5/9, economy 4.07 in NCCA, and 3/25 at economy 3.12 in List A cricket. An all-rounder teams can lean on with the ball.</div></div></li>
-        <li><span class="wi">&#128081;</span><div><div class="wl">Sharp Fielder &mdash; 108 Career Catches</div><div class="wd">Athletic in the field, with 108 catches, 5 run-outs, and 11 stumpings. A complete presence regardless of whether he&rsquo;s batting or bowling.</div></div></li>
-        <li><span class="wi">&#127758;</span><div><div class="wl">Proven at International Level</div><div class="wd">#2 MVP at Academies of the World 2023 in Leeds, and competing alongside Shakib Al Hasan in the ESPN Cricinfo-listed MAX60 Caribbean 2025.</div></div></li>
-      </ul>
-    </div>
-    <div>
-      <div class="profile-box">
-        <div class="pb-label">At a Glance</div>
-        <div class="pb-big">All-<span>Rounder</span></div>
-        <div class="pb-sub">Top Order Batsman &middot; Right-Arm Fast Bowler<br>Fremont, California &middot; Right-Hand Bat</div>
-        <div class="pb-facts">
-          <div class="pf"><strong>Career Runs:</strong>&nbsp;3,349 across all competitions</div>
-          <div class="pf"><strong>Career Wickets:</strong>&nbsp;74 &middot; Best 5/9</div>
-          <div class="pf"><strong>Career Sixes:</strong>&nbsp;111 &middot; Career Fours: 212</div>
-          <div class="pf"><strong>Fielding:</strong>&nbsp;108 catches &middot; 11 stumpings</div>
-          <div class="pf"><strong>National:</strong>&nbsp;U23 Champion</div>
-          <div class="pf"><strong>International:</strong>&nbsp;Academies of the World 2023, Leeds</div>
-          <div class="pf"><strong>MAX60 Team:</strong>&nbsp;Miami Blaze (with Shakib Al Hasan)</div>
-          <div class="pf"><strong>MiLC Team:</strong>&nbsp;East Bay Blazers</div>
-          <div class="pf"><strong>Win Rate:</strong>&nbsp;92 wins from 148 matches (62%)</div>
-          <div class="pf"><strong>ESPN Cricinfo:</strong>&nbsp;<a href="https://www.espncricinfo.com/cricketers/aarnav-iyer-1495203" target="_blank" style="color:var(--gold)">aarnav-iyer-1495203</a></div>
-        </div>
+    <div class="sv-card">
+      <div class="sv-wrap">
+        <iframe src="https://www.youtube.com/embed/l8thcbZCuyI?rel=0&modestbranding=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px 12px 0 0;"></iframe>
+      </div>
+      <div class="sv-caption">
+        <span class="sv-tag">&#9889; Six &middot; Long On</span>
+        <div class="sv-title">Over Long On &mdash; Santa Clara</div>
+        <div class="sv-sub">Full ball dispatched over the boundary with raw power</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ═══ CTA ═══ -->
-<section id="contact">
-  <div class="sec-label">For Selectors &amp; Team Owners</div>
-  <h2 class="cta-title">Ready to See <span>More?</span></h2>
-  <p class="cta-desc">Explore Aarnav&rsquo;s full verified career statistics across all platforms, or get in touch to discuss selection and availability.</p>
-  <div class="cta-btns">
-    <a class="btn-primary" href="https://cricclubs.com/NCCA/viewPlayer.do?playerId=502830&clubId=1191" target="_blank">Full Career Stats</a>
-    <a class="btn-secondary" href="https://www.espncricinfo.com/cricketers/aarnav-iyer-1495203" target="_blank">ESPN Cricinfo Profile</a>
-    <a class="btn-secondary" href="https://cricclubs.com/MiLC/viewPlayer.do?playerId=502830&clubId=18036" target="_blank">Minor League Profile</a>
+    <div class="sv-card">
+      <div class="sv-wrap">
+        <iframe src="https://www.youtube.com/embed/GRqSGCPwekg?rel=0&modestbranding=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px 12px 0 0;"></iframe>
+      </div>
+      <div class="sv-caption">
+        <span class="sv-tag">&#9889; Six &middot; Straight</span>
+        <div class="sv-title">Straight Over the Umpire&rsquo;s Head &mdash; Santa Clara</div>
+        <div class="sv-sub">Perfectly timed straight drive launched for a maximum</div>
+      </div>
+    </div>
+
+    <div class="sv-card">
+      <div class="sv-wrap">
+        <iframe src="https://www.youtube.com/embed/esB8tcDAd-g?rel=0&modestbranding=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px 12px 0 0;"></iframe>
+      </div>
+      <div class="sv-caption">
+        <span class="sv-tag">&#9889; Six &middot; Mid Wicket</span>
+        <div class="sv-title">Over Mid Wicket off Left Arm Spin &mdash; Santa Clara</div>
+        <div class="sv-sub">Decisive sweep &amp; launch off a left-arm spinner</div>
+      </div>
+    </div>
+
+    <div class="sv-card">
+      <div class="sv-wrap">
+        <iframe src="https://www.youtube.com/embed/Zs6JQ8GvyY0?rel=0&modestbranding=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px 12px 0 0;"></iframe>
+      </div>
+      <div class="sv-caption">
+        <span class="sv-tag">&#9889; Six &middot; Inside Out</span>
+        <div class="sv-title">Inside Out Six off Spinner &mdash; Davis</div>
+        <div class="sv-sub">Elegant inside-out loft over extra cover off spin bowling</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
