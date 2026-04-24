@@ -206,11 +206,11 @@ footer strong{color:var(--gold);}
       <button class="vc-tab active" onclick="showVideo(0)">Bowling</button>
       <button class="vc-tab" onclick="showVideo(1)">Batting</button>
       <button class="vc-tab" onclick="showVideo(2)">Fielding</button>
-      <button class="vc-tab" onclick="showVideo(3)">Power</button>
-      <button class="vc-tab" onclick="showVideo(4)">Six-LongOn</button>
-      <button class="vc-tab" onclick="showVideo(5)">Six-Straight</button>
-      <button class="vc-tab" onclick="showVideo(6)">Six-Wicket</button>
-      <button class="vc-tab" onclick="showVideo(7)">Six-Davis</button>
+      <button class="vc-tab" onclick="showVideo(3)">Power Hitting</button>
+      <button class="vc-tab" onclick="showVideo(4)">Power Hitting</button>
+      <button class="vc-tab" onclick="showVideo(5)">Power Hitting</button>
+      <button class="vc-tab" onclick="showVideo(6)">Power Hitting</button>
+      <button class="vc-tab" onclick="showVideo(7)">Power Hitting</button>
     </div>
     <div class="vc-panels">
       <div class="vc-embed">
@@ -353,14 +353,6 @@ function showVideo(idx) {
   document.getElementById('yt-main').src = src;
   document.getElementById('vc-caption').innerHTML = v.caption;
 }
-
-// Auto-advance logic (optional, but requested for \"auto playing\" rest)
-var currentIdx = 0;
-// Note: Manual clicks override auto-play. Adding simple interval:
-/* setInterval(() => {
-  currentIdx = (currentIdx + 1) % VIDEOS.length;
-  showVideo(currentIdx);
-}, 12000); */
 
 // Active nav on scroll
 window.addEventListener('scroll', () => {
