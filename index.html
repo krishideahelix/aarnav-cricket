@@ -336,8 +336,8 @@ footer strong{color:var(--gold);}
 </footer>
 
 <script>
+<script>
 var VIDEOS = [
-  // Existing 8 videos
   { id: 'X80ocE8spzg', caption: '<span class="vc-dot vc-dot-bowl"></span>Minor League Cricket — Disciplined fast bowling spell' },
   { id: 'lAmdrbW5_dQ', caption: '<span class="vc-dot vc-dot-bat"></span>U23 Regionals — Explosive pull shot for six' },
   { id: 'd_qIP4RvL7Y', caption: '<span class="vc-dot" style="background:#34D399"></span>Athletic catching at slips — Sharp fielding' },
@@ -346,16 +346,95 @@ var VIDEOS = [
   { id: 'esB8tcDAd-g', caption: '<span class="vc-dot vc-dot-six"></span>Straight Drive — Over the Umpires head (Santa Clara)' },
   { id: 'GRqSGCPwekg', caption: '<span class="vc-dot vc-dot-six"></span>Over Mid Wicket — Dispatching left-arm spin' },
   { id: 'l8thcbZCuyI', caption: '<span class="vc-dot vc-dot-six"></span>Inside Out — Elegant lofted cover drive (Davis)' },
-  
-  // 10 New Videos
-  { id: 'H_YDwfIYs-A', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 1 — Bowling Outswinger Caught Behind' },
-  { id: 'i4G15AsyCiM', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 2 — Bowling U19 Bowling LBW' },
-  { id: '-sj6N5ET_I4', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 3 — Bowling Big Inswinger' },
-  { id: 'JmWkSyhZ1kQ', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 4 — Bowling Caught Behind' },
-  { id: '5viNHG1YUfw', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 5 — Bowling OutSwinger' },
-  { id: 'FGvLW3Bk53I', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 6 — Bowling Caught Behind' },
-  { id: 'QecMjiby9rw', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 7 — Batting Inside Out Six' },
-  { id: 'Gjr_pzN6xoM', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 8 — Batting Straight Boundary' },
-  { id: 'X4DkFdivJ-s', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 9 — Batting Inside Out Boundary' },
-  { id: 'YdhGL0uMTwQ', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 10 — Batting Six versus Medium pace' }
+
+  { id: 'H_YDwfIYs-A', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Outswinger — Caught behind' },
+  { id: 'i4G15AsyCiM', caption: '<span class="vc-dot vc-dot-bowl"></span>U19 Bowling — LBW' },
+  { id: '-sj6N5ET_I4', caption: '<span class="vc-dot vc-dot-bowl"></span>Big inswinger — Beaten for pace' },
+  { id: 'JmWkSyhZ1kQ', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling — Caught behind' },
+  { id: '5viNHG1YUfw', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Outswinger — Edge found' },
+  { id: 'FGvLW3Bk53I', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling — Another caught behind' },
+  { id: 'QecMjiby9rw', caption: '<span class="vc-dot vc-dot-six"></span>Batting — Inside-out six' },
+  { id: 'Gjr_pzN6xoM', caption: '<span class="vc-dot vc-dot-bat"></span>Batting — Straight boundary' },
+  { id: 'X4DkFdivJ-s', caption: '<span class="vc-dot vc-dot-bat"></span>Batting — Inside-out boundary' },
+  { id: 'YdhGL0uMTwQ', caption: '<span class="vc-dot vc-dot-six"></span>Batting — Six versus medium pace' }
 ];
+
+var currentVideo = 0;
+var autoRotateTimer = null;
+var ROTATE_MS = 12000;
+
+function buildVideoUrl(videoId) {
+  return 'https://www.youtube.com/embed/' + videoId +
+    '?autoplay=1&mute=1&loop=1&playlist=' + videoId +
+    '&playsinline=1&rel=0&modestbranding=1';
+}
+
+function getCaptionEl() {
+  return (
+    document.getElementById('vc-caption') ||
+    document.querySelector('.vc-caption') ||
+    document.querySelector('[data-video-caption]')
+  );
+}
+
+function getTabs() {
+  return Array.from(document.querySelectorAll('.vc-tab'));
+}
+
+function showVideo(index) {
+  var iframe = document.getElementById('yt-main');
+  if (!iframe || !VIDEOS.length) return;
+
+  currentVideo = ((index % VIDEOS.length) + VIDEOS.length) % VIDEOS.length;
+  var video = VIDEOS[currentVideo];
+
+  iframe.src = buildVideoUrl(video.id);
+
+  var captionEl = getCaptionEl();
+  if (captionEl) {
+    captionEl.innerHTML = video.caption;
+  }
+
+  var tabs = getTabs();
+  tabs.forEach(function(tab, i) {
+    tab.classList.toggle('active', i === currentVideo);
+  });
+}
+
+function nextVideo() {
+  showVideo(currentVideo + 1);
+}
+
+function startAutoRotate() {
+  stopAutoRotate();
+  autoRotateTimer = setInterval(nextVideo, ROTATE_MS);
+}
+
+function stopAutoRotate() {
+  if (autoRotateTimer) {
+    clearInterval(autoRotateTimer);
+    autoRotateTimer = null;
+  }
+}
+
+window.showVideo = function(index) {
+  showVideo(index);
+  startAutoRotate();
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  var tabs = getTabs();
+
+  tabs.forEach(function(tab, i) {
+    tab.onclick = function() {
+      window.showVideo(i);
+    };
+  });
+
+  var iframe = document.getElementById('yt-main');
+  if (iframe && VIDEOS.length) {
+    showVideo(0);
+    startAutoRotate();
+  }
+});
+</script>
