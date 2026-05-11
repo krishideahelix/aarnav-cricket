@@ -1,3 +1,4 @@
+troub
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -336,34 +337,25 @@ footer strong{color:var(--gold);}
 
 <script>
 var VIDEOS = [
-  { id: 'X80ocE8spzg', caption: '<span class=\"vc-dot vc-dot-bowl\"></span>Minor League Cricket — Disciplined fast bowling spell' },
-  { id: 'lAmdrbW5_dQ', caption: '<span class=\"vc-dot vc-dot-bat\"></span>U23 Regionals — Explosive pull shot for six' },
-  { id: 'd_qIP4RvL7Y', caption: '<span class=\"vc-dot\" style=\"background:#34D399\"></span>Athletic catching at slips — Sharp fielding' },
-  { id: 'zRMUZ8Z0mWQ', caption: '<span class=\"vc-dot vc-dot-bat\"></span>Power Hitting — Dominant batting display' },
-  { id: 'Zs6JQ8GvyY0', caption: '<span class=\"vc-dot vc-dot-six\"></span>Over Long On — Massive power shot (Santa Clara)' },
-  { id: 'esB8tcDAd-g', caption: '<span class=\"vc-dot vc-dot-six\"></span>Straight Drive — Over the Umpires head (Santa Clara)' },
-  { id: 'GRqSGCPwekg', caption: '<span class=\"vc-dot vc-dot-six\"></span>Over Mid Wicket — Dispatching left-arm spin' },
-  { id: 'l8thcbZCuyI', caption: '<span class=\"vc-dot vc-dot-six\"></span>Inside Out — Elegant lofted cover drive (Davis)' }
+  // Existing 8 videos
+  { id: 'X80ocE8spzg', caption: '<span class="vc-dot vc-dot-bowl"></span>Minor League Cricket — Disciplined fast bowling spell' },
+  { id: 'lAmdrbW5_dQ', caption: '<span class="vc-dot vc-dot-bat"></span>U23 Regionals — Explosive pull shot for six' },
+  { id: 'd_qIP4RvL7Y', caption: '<span class="vc-dot" style="background:#34D399"></span>Athletic catching at slips — Sharp fielding' },
+  { id: 'zRMUZ8Z0mWQ', caption: '<span class="vc-dot vc-dot-bat"></span>Power Hitting — Dominant batting display' },
+  { id: 'Zs6JQ8GvyY0', caption: '<span class="vc-dot vc-dot-six"></span>Over Long On — Massive power shot (Santa Clara)' },
+  { id: 'esB8tcDAd-g', caption: '<span class="vc-dot vc-dot-six"></span>Straight Drive — Over the Umpires head (Santa Clara)' },
+  { id: 'GRqSGCPwekg', caption: '<span class="vc-dot vc-dot-six"></span>Over Mid Wicket — Dispatching left-arm spin' },
+  { id: 'l8thcbZCuyI', caption: '<span class="vc-dot vc-dot-six"></span>Inside Out — Elegant lofted cover drive (Davis)' },
+  
+  // 10 New Videos
+  { id: 'H_YDwfIYs-A', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 1 — Bowling Outswinger Caught Behind' },
+  { id: 'i4G15AsyCiM', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 2 — Bowling U19 Bowling LBW' },
+  { id: '-sj6N5ET_I4', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 3 — Bowling Big Inswinger' },
+  { id: 'JmWkSyhZ1kQ', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 4 — Bowling Caught Behind' },
+  { id: '5viNHG1YUfw', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 5 — Bowling OutSwinger' },
+  { id: 'FGvLW3Bk53I', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 6 — Bowling Caught Behind' },
+  { id: 'QecMjiby9rw', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 7 — Batting Inside Out Six' },
+  { id: 'Gjr_pzN6xoM', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 8 — Batting Straight Boundary' },
+  { id: 'X4DkFdivJ-s', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 9 — Batting Inside Out Boundary' },
+  { id: 'YdhGL0uMTwQ', caption: '<span class="vc-dot vc-dot-bat"></span>New Highlight 10 — Batting Six versus Medium pace' }
 ];
-
-function showVideo(idx) {
-  document.querySelectorAll('.vc-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
-  var v = VIDEOS[idx];
-  var src = 'https://www.youtube.com/embed/' + v.id + '?autoplay=1&mute=1&loop=1&playlist=' + v.id + '&playsinline=1&rel=0&modestbranding=1';
-  document.getElementById('yt-main').src = src;
-  document.getElementById('vc-caption').innerHTML = v.caption;
-}
-
-// Active nav on scroll
-window.addEventListener('scroll', () => {
-  let cur = '';
-  document.querySelectorAll('section[id]').forEach(s => {
-    if (window.scrollY >= s.offsetTop - 130) cur = s.id;
-  });
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
-  });
-}, { passive: true });
-</script>
-</body>
-</html>
