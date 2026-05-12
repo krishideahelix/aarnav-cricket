@@ -345,95 +345,66 @@ var VIDEOS = [
   { id: 'esB8tcDAd-g', caption: '<span class="vc-dot vc-dot-six"></span>Straight Drive — Over the Umpires head (Santa Clara)' },
   { id: 'GRqSGCPwekg', caption: '<span class="vc-dot vc-dot-six"></span>Over Mid Wicket — Dispatching left-arm spin' },
   { id: 'l8thcbZCuyI', caption: '<span class="vc-dot vc-dot-six"></span>Inside Out — Elegant lofted cover drive (Davis)' },
-
-  { id: 'H_YDwfIYs-A', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Outswinger — Caught behind' },
-  { id: 'i4G15AsyCiM', caption: '<span class="vc-dot vc-dot-bowl"></span>U19 Bowling — LBW' },
-  { id: '-sj6N5ET_I4', caption: '<span class="vc-dot vc-dot-bowl"></span>Big inswinger — Beaten for pace' },
-  { id: 'JmWkSyhZ1kQ', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling — Caught behind' },
-  { id: '5viNHG1YUfw', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Outswinger — Edge found' },
-  { id: 'FGvLW3Bk53I', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling — Another caught behind' },
-  { id: 'QecMjiby9rw', caption: '<span class="vc-dot vc-dot-six"></span>Batting — Inside-out six' },
-  { id: 'Gjr_pzN6xoM', caption: '<span class="vc-dot vc-dot-bat"></span>Batting — Straight boundary' },
-  { id: 'X4DkFdivJ-s', caption: '<span class="vc-dot vc-dot-bat"></span>Batting — Inside-out boundary' },
-  { id: 'YdhGL0uMTwQ', caption: '<span class="vc-dot vc-dot-six"></span>Batting — Six versus medium pace' }
+  { id: 'H_YDwfIYs-A', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 9' },
+  { id: 'i4G15AsyCiM', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 10' },
+  { id: '-sj6N5ET_I4', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 11' },
+  { id: 'JmWkSyhZ1kQ', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 12' },
+  { id: '5viNHG1YUfw', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 13' },
+  { id: 'FGvLW3Bk53I', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 14' },
+  { id: 'QecMjiby9rw', caption: '<span class="vc-dot vc-dot-bat"></span>Batting Highlight 15' },
+  { id: 'Gjr_pzN6xoM', caption: '<span class="vc-dot vc-dot-bat"></span>Batting Highlight 16' },
+  { id: 'X4DkFdivJ-s', caption: '<span class="vc-dot vc-dot-bat"></span>Batting Highlight 17' },
+  { id: 'YdhGL0uMTwQ', caption: '<span class="vc-dot vc-dot-six"></span>Batting Highlight 18' }
 ];
 
 var currentVideo = 0;
-var autoRotateTimer = null;
-var ROTATE_MS = 12000;
+var ROTATE_MS = 8000;
+var rotateTimer = null;
 
-function buildVideoUrl(videoId) {
-  return 'https://www.youtube.com/embed/' + videoId +
-    '?autoplay=1&mute=1&loop=1&playlist=' + videoId +
-    '&playsinline=1&rel=0&modestbranding=1';
-}
-
-function getCaptionEl() {
-  return (
-    document.getElementById('vc-caption') ||
-    document.querySelector('.vc-caption') ||
-    document.querySelector('[data-video-caption]')
-  );
-}
-
-function getTabs() {
-  return Array.from(document.querySelectorAll('.vc-tab'));
+function buildVideoUrl(id) {
+  return 'https://www.youtube.com/embed/' + id + '?autoplay=1&mute=1&loop=1&playlist=' + id + '&playsinline=1&rel=0&modestbranding=1&enablejsapi=0';
 }
 
 function showVideo(index) {
-  var iframe = document.getElementById('yt-main');
-  if (!iframe || !VIDEOS.length) return;
-
   currentVideo = ((index % VIDEOS.length) + VIDEOS.length) % VIDEOS.length;
   var video = VIDEOS[currentVideo];
-
-  iframe.src = buildVideoUrl(video.id);
-
-  var captionEl = getCaptionEl();
-  if (captionEl) {
-    captionEl.innerHTML = video.caption;
-  }
-
-  var tabs = getTabs();
-  tabs.forEach(function(tab, i) {
-    tab.classList.toggle('active', i === currentVideo);
-  });
-}
-
-function nextVideo() {
-  showVideo(currentVideo + 1);
-}
-
-function startAutoRotate() {
-  stopAutoRotate();
-  autoRotateTimer = setInterval(nextVideo, ROTATE_MS);
-}
-
-function stopAutoRotate() {
-  if (autoRotateTimer) {
-    clearInterval(autoRotateTimer);
-    autoRotateTimer = null;
-  }
-}
-
-window.showVideo = function(index) {
-  showVideo(index);
-  startAutoRotate();
-};
-
-document.addEventListener('DOMContentLoaded', function() {
-  var tabs = getTabs();
-
-  tabs.forEach(function(tab, i) {
-    tab.onclick = function() {
-      window.showVideo(i);
-    };
-  });
-
   var iframe = document.getElementById('yt-main');
-  if (iframe && VIDEOS.length) {
-    showVideo(0);
-    startAutoRotate();
+  if (iframe) {
+    iframe.src = buildVideoUrl(video.id);
   }
-});
+  var cap = document.getElementById('vc-caption');
+  if (cap) cap.innerHTML = video.caption;
+  var tabs = document.querySelectorAll('.vc-tab');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.toggle('active', i === currentVideo);
+  }
+}
+
+function startRotate() {
+  if (rotateTimer) clearInterval(rotateTimer);
+  rotateTimer = setInterval(function() {
+    showVideo(currentVideo + 1);
+  }, ROTATE_MS);
+}
+
+function initCarousel() {
+  var tabs = document.querySelectorAll('.vc-tab');
+  for (var i = 0; i < tabs.length; i++) {
+    (function(idx) {
+      tabs[idx].addEventListener('click', function(e) {
+        e.preventDefault();
+        showVideo(idx);
+        startRotate();
+      });
+    })(i);
+  }
+  showVideo(0);
+  startRotate();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCarousel);
+} else {
+  initCarousel();
+}
 </script>
