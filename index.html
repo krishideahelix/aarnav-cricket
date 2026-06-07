@@ -361,7 +361,7 @@ var ROTATE_MS = 8000; // fallback; each video uses its own .dur if set
 var rotateTimer = null;
 
 function buildVideoUrl(id) {
-  return 'https://www.youtube.com/embed/' + id + '?autoplay=1&mute=1&loop=1&playlist=' + id + '&playsinline=1&rel=0&modestbranding=1&enablejsapi=0';
+  return 'https://www.youtube.com/embed/' + id + '?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0';
 }
 
 function showVideo(index) {
@@ -381,9 +381,11 @@ function showVideo(index) {
 
 function startRotate() {
   if (rotateTimer) clearTimeout(rotateTimer);
-  function scheduleNext(){var v=VIDEOS[currentVideo];var ms=(v&&v.dur)?v.dur*1000+1500:ROTATE_MS;rotateTimer=setTimeout(function(){showVideo((currentVideo+1)%VIDEOS.length);scheduleNext();},ms);} scheduleNext(); if(false&&(
+  function scheduleNext(){var v=VIDEOS[currentVideo];var ms=(v&&v.dur)?v.dur*1000+1500:ROTATE_MS;rotateTimer=setTimeout(function(){showVideo(currentVideo+1);scheduleNext();},ms);}function(){showVideo((currentVideo+1)%VIDEOS.length);scheduleNext();},ms);} scheduleNext(); if(false&&(
     showVideo(currentVideo + 1);
+   scheduleNext();
   }, ROTATE_MS);
+   scheduleNext();
 }
 
 function initCarousel() {
