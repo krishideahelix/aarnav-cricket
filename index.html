@@ -96,7 +96,8 @@ h1.hero-name{ font-size:clamp(3.5rem,8vw,8rem); font-weight:900;line-height:0.9;
 .vc-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(245,158,11,0.05);}
 .vc-tab:hover{color:var(--gold);}
 .vc-embed{ position:relative;width:100%;padding-top:56.25%;background:#000; }
-.vc-embed iframe { position:absolute;top:0;left:0;width:100%;height:100%; border:none; display:block; }
+.vc-embed iframe { position:absolute;top:0;left:0;width:100%;height:100%; border:none; display:block; opacity:0; transition:opacity 0.5s; }
+.vc-embed iframe.active { opacity:1; }
 .vc-caption{ padding:14px 20px; font-size:0.8rem;color:var(--muted); display:flex;align-items:center;gap:8px; }
 .vc-dot{ width:8px;height:8px;border-radius:50%;flex-shrink:0; }
 .vc-dot-bat{background:var(--gold);}
@@ -214,7 +215,24 @@ footer strong{color:var(--gold);}
     </div>
     <div class="vc-panels">
       <div class="vc-embed">
-        <iframe id="yt-main" src="https://www.youtube.com/embed/X80ocE8spzg?autoplay=1&mute=1&loop=1&playlist=X80ocE8spzg&playsinline=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe class="vc-iframe active" src="https://www.youtube.com/embed/X80ocE8spzg?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/lAmdrbW5_dQ?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/d_qIP4RvL7Y?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/zRMUZ8Z0mWQ?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/Zs6JQ8GvyY0?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/esB8tcDAd-g?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/GRqSGCPwekg?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/l8thcbZCuyI?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/H_YDwfIYs-A?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/i4G15AsyCiM?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/-sj6N5ET_I4?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/JmWkSyhZ1kQ?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/5viNHG1YUfw?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/FGvLW3Bk53I?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/QecMjiby9rw?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/Gjr_pzN6xoM?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/X4DkFdivJ-s?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe class="vc-iframe" src="https://www.youtube.com/embed/YdhGL0uMTwQ?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
       <div class="vc-caption" id="vc-caption">
         <span class="vc-dot vc-dot-bowl"></span>Minor League Cricket — Disciplined fast bowling spell
@@ -364,27 +382,28 @@ function buildVideoUrl(id) {
   return 'https://www.youtube.com/embed/' + id + '?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=0';
 }
 
-function showVideo(index) {
-  currentVideo = ((index % VIDEOS.length) + VIDEOS.length) % VIDEOS.length;
-  var video = VIDEOS[currentVideo];
-  var iframe = document.getElementById('yt-main');
-  if (iframe) {
-    iframe.src = buildVideoUrl(video.id);
+  function showVideo(index) {
+    currentVideo = ((index % VIDEOS.length) + VIDEOS.length) % VIDEOS.length;
+    var video = VIDEOS[currentVideo];
+    var iframes = document.querySelectorAll('.vc-iframe');
+    iframes.forEach(function(f, i) {
+      f.style.opacity = (i === currentVideo) ? '1' : '0';
+      f.style.pointerEvents = (i === currentVideo) ? 'auto' : 'none';
+    });
+    var cap = document.getElementById('vc-caption');
+    if (cap) cap.innerHTML = video.caption;
+    var tabs = document.querySelectorAll('.vc-tab');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].classList.toggle('active', i === currentVideo);
+    }
   }
-  var cap = document.getElementById('vc-caption');
-  if (cap) cap.innerHTML = video.caption;
-  var tabs = document.querySelectorAll('.vc-tab');
-  for (var i = 0; i < tabs.length; i++) {
-    tabs[i].classList.toggle('active', i === currentVideo);
-  }
-}
 
 function startRotate() {
   if (rotateTimer) clearTimeout(rotateTimer);
   function scheduleNext(){var v=VIDEOS[currentVideo];var ms=(v&&v.dur)?v.dur*1000+1500:ROTATE_MS;rotateTimer=setTimeout(function(){showVideo(currentVideo+1);scheduleNext();},ms);}function(){showVideo((currentVideo+1)%VIDEOS.length);scheduleNext();},ms);} scheduleNext(); if(false&&(
     showVideo(currentVideo + 1);
    scheduleNext();
-  }, ROTATE_MS);
+      }, ms);
    scheduleNext();
 }
 
