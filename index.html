@@ -400,15 +400,18 @@ function buildVideoUrl(id) {
 
 function startRotate() {
   if (rotateTimer) clearTimeout(rotateTimer);
-  function scheduleNext(){var v=VIDEOS[currentVideo];var ms=(v&&v.dur)?v.dur*1000+1500:ROTATE_MS;rotateTimer=setTimeout(function(){showVideo(currentVideo+1);scheduleNext();},ms);}function(){showVideo((currentVideo+1)%VIDEOS.length);scheduleNext();},ms);} scheduleNext(); if(false&&(
-    showVideo(currentVideo + 1);
-   scheduleNext();
-      }, ms);
-   scheduleNext();
+    function scheduleNext() {
+    var v = VIDEOS[currentVideo];
+    var ms = (v && v.dur) ? v.dur * 1000 + 1500 : ROTATE_MS;
+    rotateTimer = setTimeout(function() {
+      showVideo(currentVideo + 1);
+      scheduleNext();
+    }, ms);
+  }
+  scheduleNext();
 }
 
-function initCarousel() {
-  var tabs = document.querySelectorAll('.vc-tab');
+function initCarousel() {var tabs = document.querySelectorAll('.vc-tab');
   for (var i = 0; i < tabs.length; i++) {
     (function(idx) {
       tabs[idx].addEventListener('click', function(e) {
