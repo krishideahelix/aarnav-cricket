@@ -1,4 +1,3 @@
-troub
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -337,28 +336,28 @@ footer strong{color:var(--gold);}
 
 <script>
 var VIDEOS = [
-  { id: 'X80ocE8spzg', caption: '<span class="vc-dot vc-dot-bowl"></span>Minor League Cricket — Disciplined fast bowling spell' },
-  { id: 'lAmdrbW5_dQ', caption: '<span class="vc-dot vc-dot-bat"></span>U23 Regionals — Explosive pull shot for six' },
-  { id: 'd_qIP4RvL7Y', caption: '<span class="vc-dot" style="background:#34D399"></span>Athletic catching at slips — Sharp fielding' },
-  { id: 'zRMUZ8Z0mWQ', caption: '<span class="vc-dot vc-dot-bat"></span>Power Hitting — Dominant batting display' },
-  { id: 'Zs6JQ8GvyY0', caption: '<span class="vc-dot vc-dot-six"></span>Over Long On — Massive power shot (Santa Clara)' },
-  { id: 'esB8tcDAd-g', caption: '<span class="vc-dot vc-dot-six"></span>Straight Drive — Over the Umpires head (Santa Clara)' },
-  { id: 'GRqSGCPwekg', caption: '<span class="vc-dot vc-dot-six"></span>Over Mid Wicket — Dispatching left-arm spin' },
-  { id: 'l8thcbZCuyI', caption: '<span class="vc-dot vc-dot-six"></span>Inside Out — Elegant lofted cover drive (Davis)' },
-  { id: 'H_YDwfIYs-A', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 9' },
-  { id: 'i4G15AsyCiM', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 10' },
-  { id: '-sj6N5ET_I4', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 11' },
-  { id: 'JmWkSyhZ1kQ', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 12' },
-  { id: '5viNHG1YUfw', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 13' },
-  { id: 'FGvLW3Bk53I', caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling Highlight 14' },
-  { id: 'QecMjiby9rw', caption: '<span class="vc-dot vc-dot-bat"></span>Batting Highlight 15' },
-  { id: 'Gjr_pzN6xoM', caption: '<span class="vc-dot vc-dot-bat"></span>Batting Highlight 16' },
-  { id: 'X4DkFdivJ-s', caption: '<span class="vc-dot vc-dot-bat"></span>Batting Highlight 17' },
-  { id: 'YdhGL0uMTwQ', caption: '<span class="vc-dot vc-dot-six"></span>Batting Highlight 18' }
+  { id: 'X80ocE8spzg', dur: 47, caption: '<span class="vc-dot vc-dot-bowl"></span>Minor League Cricket — Disciplined fast bowling spell' },
+  { id: 'lAmdrbW5_dQ', dur: 11, caption: '<span class="vc-dot vc-dot-bat"></span>U23 Regionals — Explosive pull shot for six' },
+  { id: 'd_qIP4RvL7Y', dur: 30, caption: '<span class="vc-dot" style="background:#34D399"></span>Athletic catching at slips — Sharp fielding' },
+  { id: 'zRMUZ8Z0mWQ', dur: 19, caption: '<span class="vc-dot vc-dot-bat"></span>Power Hitting — Dominant batting display' },
+  { id: 'Zs6JQ8GvyY0', dur: 10, caption: '<span class="vc-dot vc-dot-six"></span>Over Long On — Massive power shot (Santa Clara)' },
+  { id: 'esB8tcDAd-g', dur: 17, caption: '<span class="vc-dot vc-dot-six"></span>Straight Drive — Over the Umpires head (Santa Clara)' },
+  { id: 'GRqSGCPwekg', dur: 14, caption: '<span class="vc-dot vc-dot-six"></span>Over Mid Wicket — Dispatching left-arm spin' },
+  { id: 'l8thcbZCuyI', dur: 20, caption: '<span class="vc-dot vc-dot-six"></span>Inside Out — Elegant lofted cover drive (Davis)' },
+  { id: 'H_YDwfIYs-A', dur: 19, caption: '<span class="vc-dot vc-dot-bowl"></span>Six Over Mid Wicket — U23 Nationals' },
+  { id: 'i4G15AsyCiM', dur: 14, caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling vs USA U19 — LBW' },
+  { id: '-sj6N5ET_I4', dur: 7, caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling vs USA U19 — Beaten Inswinger' },
+  { id: 'JmWkSyhZ1kQ', dur: 21, caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling vs USA U19 — Caught Behind Outswinger' },
+  { id: '5viNHG1YUfw', dur: 10, caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling vs USA U19 — Outswinger Beaten' },
+  { id: 'FGvLW3Bk53I', dur: 12, caption: '<span class="vc-dot vc-dot-bowl"></span>Bowling vs USA U19 — Outswinger Caught Behind' },
+  { id: 'QecMjiby9rw', dur: 8, caption: '<span class="vc-dot vc-dot-bat"></span>Inside Out Boundary — vs Off Spinner' },
+  { id: 'Gjr_pzN6xoM', dur: 10, caption: '<span class="vc-dot vc-dot-bat"></span>Straight Boundary — Clean Strike' },
+  { id: 'X4DkFdivJ-s', dur: 6, caption: '<span class="vc-dot vc-dot-bat"></span>Inside Out Boundary — vs Left Arm Spinner' },
+  { id: 'YdhGL0uMTwQ', dur: 17, caption: '<span class="vc-dot vc-dot-six"></span>Straight Six — vs Medium Pacer' }
 ];
 
 var currentVideo = 0;
-var ROTATE_MS = 8000;
+var ROTATE_MS = 8000; // fallback; each video uses its own .dur if set
 var rotateTimer = null;
 
 function buildVideoUrl(id) {
@@ -381,8 +380,8 @@ function showVideo(index) {
 }
 
 function startRotate() {
-  if (rotateTimer) clearInterval(rotateTimer);
-  rotateTimer = setInterval(function() {
+  if (rotateTimer) clearTimeout(rotateTimer);
+  function scheduleNext(){var v=VIDEOS[currentVideo];var ms=(v&&v.dur)?v.dur*1000+1500:ROTATE_MS;rotateTimer=setTimeout(function(){showVideo((currentVideo+1)%VIDEOS.length);scheduleNext();},ms);} scheduleNext(); if(false&&(
     showVideo(currentVideo + 1);
   }, ROTATE_MS);
 }
